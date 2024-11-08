@@ -1,102 +1,43 @@
 <script setup>
+import { ref, watch, computed } from 'vue';
+import Question from '../components/Question.vue';
+import QuizHeader from '../components/QuizHeader.vue';
+import Result from '../components/Result.vue';
+import { useRoute } from 'vue-router';
+import quizes from '../data/quizes.json';
+
+const route = useRoute();
+const quizId = parseInt(route.params.id);
+const quiz = quizes.find(q => q.id === quizId);
+const numOfQuestions = quiz.questions.length;
+const currentQuestionIndex = ref(0);
+const correctAnswers = ref(0);
+const showResults = ref(false);
+
+// it listens to any values that are in this computed function
+const questionStatus = computed(() => `${currentQuestionIndex.value}/${numOfQuestions}`);
+const barPercentage = computed(() => `${currentQuestionIndex.value / numOfQuestions * 100}%`)
+
+const onOptionSelected = (isCorrect) => {
+    if (isCorrect) {
+        correctAnswers.value++;
+    }
+
+    currentQuestionIndex.value++;
+
+    if (currentQuestionIndex.value === numOfQuestions) {
+        showResults.value = true
+    }
+}
 </script>
+
 <template>
     <div>
-        <header>
-            <h4>Question 1/3</h4>
-            <div class="bar">
-                <div class="completion"></div>
-            </div>
-        </header>
+        <QuizHeader :questionStatus="questionStatus" :barPercentage="barPercentage" />
         <div>
-            <div class="question-container">
-                <h1 class="question">What is the chemical value of table salt?</h1>
-            </div>
-            <div class="options-container">
-                <div class="option">
-                    <p class="option-label">A</p>
-                    <div class="option-value">
-                        <p>NaCL</p>
-                    </div>
-                </div>
-                <div class="option">
-                    <p class="option-label">B</p>
-                    <div class="option-value">
-                        <p>NaCL</p>
-                    </div>
-                </div>
-                <div class="option">
-                    <p class="option-label">C</p>
-                    <div class="option-value">
-                        <p>NaCL</p>
-                    </div>
-                </div>
-                <div class="option">
-                    <p class="option-label">D</p>
-                    <div class="option-value">
-                        <p>NaCL</p>
-                    </div>
-                </div>
-            </div>
+            <Question v-if="!showResults" :question="quiz.questions[currentQuestionIndex]"
+                @selectOption="onOptionSelected" />
+            <Result v-else :correctAnswers="correctAnswers" :quizQuestionLength="numOfQuestions" />
         </div>
     </div>
 </template>
-
-<style scoped>
-header {
-    margin-top: 20px;
-}
-
-header h4 {
-    font-size: 30px;
-}
-
-.bar {
-    width: 300px;
-    height: 50px;
-    border: 3px solid bisque;
-}
-
-.completion {
-    height: 100%;
-    width: 0%;
-    background-color: bisque;
-}
-
-.question-container {
-    margin-top: 20px;
-}
-
-.question {
-    font-size: 40px;
-    margin-bottom: 20px;
-}
-
-.option {
-    display: flex;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-.option-label {
-    background-color: bisque;
-    color: black;
-    width: 50px;
-    height: 50px;
-    font-size: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.option-value {
-    background-color: rgb(244, 239, 239);
-    width: 100%;
-    font-size: 30px;
-    padding: 0 20px;
-}
-
-.option-value p{
-    color: black;
-}
-</style>
