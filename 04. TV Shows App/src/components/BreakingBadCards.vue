@@ -1,18 +1,22 @@
 <script setup>
-import axios from 'axios';
-import { ref, watch } from 'vue';
+import { fetchData } from '../../apiService';
+import { onMounted, ref, watch } from 'vue';
 import Card from './Card.vue';
 
 const charachters = ref(null);
+const errorMessage = ref(null);
 const page = ref(1);
 
-const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page.value}`);
-charachters.value = response.data.results;
-console.log(response);
+onMounted(async () => {
+    try {
+        charachters.value = await fetchData(page.value);
+    } catch (error) {
+        errorMessage.value = 'Unable to load data';
+    }
+});
 
-watch(page, async () => {
-    const res = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page.value}`);
-    charachters.value = res.data.results;
+watch(page,async  () => {
+    charachters.value = await fetchData(page.value);
 });
 
 </script>

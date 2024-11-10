@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "vue": "^3.5.12"
+    "localforage": "^1.10.0",
+    "vite-plugin-pwa": "^0.20.5",
+    "vue": "^3.5.12",
+    "workbox-window": "^7.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
