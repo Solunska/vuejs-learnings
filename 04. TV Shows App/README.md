@@ -1,29 +1,17 @@
-# 04. TV Shows App
+# Project 4: TV Show Characters App
 
-This template should help get you started developing with Vue 3 in Vite.
+## Description
+This Vue.js application showcases characters from the Rick and Morty TV show, allowing users to navigate through character profiles with a seamless, paginated browsing experience. The app integrates both online and offline functionality, fetching data from an API when online and using cached data when offline to ensure accessibility. Styled with Naive UI and enhanced with scoped CSS, the app provides a visually engaging and user-friendly experience.
 
-## Recommended IDE Setup
+## Key Learnings
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+- **Offline-First Approach with LocalForage**  
+    - Integrated **localforage** to store fetched character data locally, making it accessible even when offline.
+    - Learned to manage conditional data retrieval based on network status, prioritizing cached data if the user is offline and updating it when back online.
+- **Service Workers for Progressive Web App (PWA) Functionality**  
+    - Registered a **service worker** to manage caching, allowing the app to load resources faster and enhancing offline capabilities.
+- **Asynchronous API Handling with Axios**  
+    - Utilized **Axios** to handle API calls to the Rick and Morty character API.
+    - Implemented **error handling** to manage potential fetch failures, defaulting to cached data to provide a fallback when the network is unavailable.
+- **Vue Suspense for Enhanced Loading States**  
+    - Implemented Vue’s `<Suspense>` component to show a loading indicator while character data is fetched, providing immediate feedback and improving UX.
