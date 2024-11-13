@@ -1,29 +1,21 @@
-# 05. State Managements in Vue
+# Project 5: State Managements
 
-This template should help get you started developing with Vue 3 in Vite.
+## Description
+The State Managements project is a Vue.js application that demonstrates the use of centralized state management with Pinia and the Composition API. The app features a multi-level component structure, where the state is managed in a central store and shared between nested components without relying on prop drilling.
 
-## Recommended IDE Setup
+## Key Learnings
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **State Management with Pinia**
+    - Integrated **Pinia** for centralized state management, enabling a reactive store for managing the `numbers` array.
+    - Defined a store using **Pinia** to handle state (`numbers`), actions (`addNumber`), and getters (`doubleNumber`, `filterNumbers`), making it easy to access and update state across components.
 
-## Customize configuration
+- **Composition API for Flexible Logic**
+    - Used Vue’s **Composition API** to create reusable logic through custom hooks (e.g., `useNumbers`).
+    - Leveraged **provide** and **inject** to manage state and functions across nested components without prop drilling.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+- **Component Hierarchy and Data Flow**
+    - Created a multi-level component hierarchy with **Parent**, **Child**, **GrandChild**, and **GreatGrandChild** components.
+    - **Parent** component manages state and passes data to child components using **Pinia** store or Vue's `provide`/`inject` for state sharing.
+- **Dynamic Data Handling**
+    - Implemented dynamic number handling in the components, allowing for adding numbers and filtering them based on specific conditions.
+    - Provided reactive updates across all components whenever the numbers array changes, utilizing the Pinia store.

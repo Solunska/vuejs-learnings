@@ -1,5 +1,5 @@
 <script setup>
-import BreakingBadCards from './components/BreakingBadCards.vue';
+import RickAndMortyCards from './components/RickAndMortyCards.vue';
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js').then((registration) => {
@@ -18,7 +18,7 @@ if ('serviceWorker' in navigator) {
     </div>
     <Suspense>
       <template #default>
-        <BreakingBadCards />
+        <RickAndMortyCards />
       </template>
       <template #fallback>
         <div>
